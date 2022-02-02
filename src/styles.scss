@@ -1,0 +1,32 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+@import "~@angular/material/theming";
+
+
+/* Importing Datepicker SCSS file. */
+@import "~ngx-bootstrap/datepicker/bs-datepicker";
+
+@import '~ngx-sharebuttons/themes/material/material-dark-theme';
+@import '~ngx-sharebuttons/themes/modern/modern-light-theme';
+@import '~ngx-sharebuttons/themes/circles/circles-dark-theme';
+
+@include mat-core();
+
+$market-primary: mat-palette($mat-light-blue);
+$market-accent: mat-palette($mat-light-green);
+$market-warn: mat-palette($mat-red);
+
+$market-theme: mat-light-theme($market-primary,$market-accent,$market-warn);
+@include angular-material-theme($market-theme);
+
+
+$market-primary-dark: mat-palette($mat-orange);
+$market-accent-dark: mat-palette($mat-yellow);
+$market-warn-dark: mat-palette($mat-red);
+
+$market-theme-dark: mat-dark-theme($market-primary-dark,$market-accent-dark,$market-warn-dark); 
+.dark-theme-mode{
+    @include angular-material-theme($market-theme-dark)
+}

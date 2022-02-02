@@ -1,0 +1,37 @@
+<app-nav-client></app-nav-client>
+
+<div class="row" style="margin-top:10px;">
+    <div class="col-sm-4">
+        <app-sidebar></app-sidebar>
+    </div>
+
+    <div class="col-sm-8">
+        <app-detail-post (refreshList)="refreshList()" [post]="currentPost"></app-detail-post>
+    </div>
+</div>
+
+<div class="row">
+    <h4>Bài viết liên quan</h4>
+    <div class="col-sm-3" *ngFor="let post of sidebarPost | slice:0:4 ;let i = index">
+        <div class="card mb-4">
+            <a (click)="setActivePost(post, i)"><img class="card-img-top img-thumbnail" src="{{post.image}}"
+                    alt="..." /></a>
+            <div class="card-body">
+                <a (click)="setActivePost(post, i)">
+                    <h6 class="card-title">{{post.title}}</h6>
+                </a>
+                <div class="small text-muted">
+                    <mat-icon>style</mat-icon>{{post.category}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="py-5 bg-light">
+    <div class="container">
+        <p class="m-0 text-center text-black">Copyright &copy; Covid19Note</p>
+        <p class="m-0 text-center text-black">Email liên hệ: letranghoanghuy@gmail.com</p>
+        <p class="m-0 text-center text-black">This is a student topic-Đây là một đề tài sinh viên</p>
+    </div>
+</footer>

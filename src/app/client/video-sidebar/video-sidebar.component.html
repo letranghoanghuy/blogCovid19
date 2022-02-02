@@ -1,0 +1,47 @@
+<app-nav-client></app-nav-client>
+
+<div class="card mb-4" style="margin-top: 20px;">
+    <div class="card-header">Tìm kiếm</div>
+    <div class="card-body">
+        <div class="input-group">
+            <input class="form-control" type="text" placeholder="Nhập nội dung cần tìm..."
+                aria-label="Enter search term..." aria-describedby="button-search" [(ngModel)]="data"/>
+            <button class="btn btn-primary" id="button-search" type="button" (click)="search()">Tìm!</button>
+        </div>
+    </div>
+</div>
+
+<h2 style="text-align:center">Videos</h2>
+<div class="row">
+    <div class="col-sm-7">
+        <app-detail-video (refreshList)="refreshList()" [video]="currentVideo"></app-detail-video>
+    </div>
+    <div class="col-sm-5">
+        <h6>Danh sách gần đây</h6>
+
+        <div class="card mb-3" style="max-width: 540px;"
+            *ngFor="let video of videos | slice:0:4;let i = index">
+            <div class="row no-gutters">
+                <div class="col-md-6">
+                    <a (click)="setActiveVideo(video, i)"><img src="{{video.image}}" class="card-img img-thumbnail"
+                            alt="..."></a>
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <a (click)="setActiveVideo(video, i)">
+                            <h6 class="card-title">{{video.title}}</h6>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="py-5 bg-light">
+    <div class="container">
+        <p class="m-0 text-center text-black">Copyright &copy; Covid19Note</p>
+        <p class="m-0 text-center text-black">Email liên hệ: letranghoanghuy@gmail.com</p>
+        <p class="m-0 text-center text-black">This is a student topic-Đây là một đề tài sinh viên</p>
+    </div>
+</footer>

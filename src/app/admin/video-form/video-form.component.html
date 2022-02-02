@@ -1,0 +1,70 @@
+<app-nav-admin></app-nav-admin>
+<div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <textarea
+          type="text"
+          class="form-control"
+          id="title"
+          required
+          [(ngModel)]="video.title"
+          name="title"
+        ></textarea>
+      </div>
+      <div class="form-group">
+        <label for="date">Date</label>
+        <input
+          class="form-control"
+          id="date"
+          required
+          [(ngModel)]="video.date"
+          name="date"
+          type="date"
+        />
+      </div>
+      <img src="{{video.image}}" class="img-thumbnail">
+      <div class="form-group">
+        <label for="image">Image</label>
+        <input
+          class="form-control"
+          id="image"
+          required
+          [(ngModel)]="video.image"
+          name="image"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="iframe">IFrame</label>
+        <input
+          class="form-control"
+          id="iframe"
+          required
+          [(ngModel)]="video.iframe"
+          name="iframe"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="views">Views</label>
+        <input
+          class="form-control"
+          id="views"
+          required
+          [(ngModel)]="video.views"
+          name="views"
+          [disabled]="true"
+        />
+      </div>
+    
+      <button (click)="saveVideo()" class="btn btn-success" 
+      [disabled]="!video.title || !video.iframe || !video.image">
+      Submit</button>
+    </div>
+  
+    <div *ngIf="submitted">
+      <h4>You submitted successfully!</h4>
+      <button class="btn btn-success" (click)="newVideo()">Add</button>
+    </div>
+  </div>

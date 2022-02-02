@@ -1,0 +1,33 @@
+<app-nav-client></app-nav-client>
+
+<div class="row" style="margin-top:10px;">
+  <div class="col-lg-4">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="col-lg-8">
+    <h4>Bài viết mới</h4>
+    <div class="row">
+      <div class="col-lg-4" *ngFor="let post of posts | paginate: { itemsPerPage: 9, currentPage: page, totalItems: totalLength };let i = index"
+      >
+        <!-- Blog post-->
+        <div class="card mb-4">
+          <a (click)="setActivePost(post, i)"><img class="card-img-top" src="{{post.image}}" alt="..." /></a>
+          <div class="card-body">
+            <h5 class="card-title">{{post.title}}</h5>
+            <div class="small text-muted"><mat-icon>style</mat-icon>{{post.category}}</div>
+            <a class="btn btn-primary"  (click)="setActivePost(post, i)">Đọc →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  </div>
+</div>
+
+<footer class="py-5 bg-light">
+  <div class="container">
+    <p class="m-0 text-center text-black">Copyright &copy; Covid19Note</p>
+    <p class="m-0 text-center text-black">Email liên hệ: letranghoanghuy@gmail.com</p>
+    <p class="m-0 text-center text-black">This is a student topic-Đây là một đề tài sinh viên</p>
+  </div>
+</footer>

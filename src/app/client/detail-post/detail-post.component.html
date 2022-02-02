@@ -1,0 +1,17 @@
+<div class="embed-responsive ">
+
+    <h3 style="text-align:center;">{{currentPost.title}}</h3>
+    <p class="small text-muted text-center">
+        <mat-icon>date_range</mat-icon> {{currentPost.date}} &nbsp;&nbsp; <mat-icon>style</mat-icon>
+        {{currentPost.category}} &nbsp;&nbsp; <mat-icon>remove_red_eye</mat-icon> {{currentPost.views}}
+    </p>
+    <div [innerHTML]="currentPost.content"></div>
+</div>
+
+<span *ngIf="!(afAuth.user | async)">Bạn cần đăng nhập để thực hiện tính năng chia sẻ dưới đây</span>
+<share-buttons [theme]="'material-dark'" [disabled]="!(afAuth.user | async)"
+    [include]="['facebook','twitter','linkedin','pinterest','reddit','mix','vk','telegram','messenger','whatsapp','xing','line','sms','email','copy']"
+    [show]="9" [size]="1" [url]="'https://covid19note.tk/'" [image]="newimg" [autoSetMeta]="false">
+</share-buttons>
+
+

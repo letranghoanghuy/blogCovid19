@@ -1,0 +1,27 @@
+ <app-nav-admin></app-nav-admin>
+
+ <div class="list row" style="margin-top: 20px;">
+    <div class="col-md-6">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Type to search" [(ngModel)]="data">
+      </div>
+      <h4>Informations List</h4>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let information of informations?.reverse() | filter:data | paginate: { itemsPerPage: 8, currentPage: page, totalItems: totalLength } ;
+      let i = index" [class.active]="i == currentIndex" (click)="setActiveInformation(information, i)">
+          {{ information.title }}
+        </li>
+      </ul>
+      <pagination-controls (pageChange)="page = $event"></pagination-controls>
+    </div>
+    <div class="col-md-6">
+      <div *ngIf="currentInformation">
+        <app-information-detail (refreshList)="refreshList()" [information]="currentInformation"></app-information-detail>
+      </div>
+  
+      <div *ngIf="!currentInformation">
+        <br />
+        <p>Please click on a Information...</p>
+      </div>
+    </div>
+  </div> 

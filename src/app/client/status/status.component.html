@@ -1,0 +1,94 @@
+<app-nav-client></app-nav-client>
+<h2 style="text-align:center;">Tình hình Covid-19</h2>
+
+<div style="display: block;" *ngIf="chartIsReady">
+  <canvas baseChart height="100vh" [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+    [legend]="barChartLegend" [chartType]="barChartType" [colors]="chartColors">
+  </canvas>
+</div>
+<span style="float: right; font-size: 20px;">
+  Số Countries trong đồ thị: &nbsp;
+  <select (change)="changingValue($event)">
+    <option *ngFor="let i of totalColumns" [selected]="i === currentTotalColumn">
+      {{ i }}
+    </option>
+  </select>
+</span>
+
+<h4>Toàn cầu</h4>
+<table class="table table-bordered" style="margin-top: 20px;">
+  <thead>
+    <tr>
+      <th>Ngày</th>
+      <th>Mới nhiễm</th>
+      <th>Mới chết</th>
+      <th>Tổng ca nhiễm</th>
+      <th>Tổng ca tử vong</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{globalData.Date | date: "shortDate"}}</td>
+      <td>{{globalData.NewConfirmed}}</td>
+      <td>{{globalData.NewDeaths}}</td>
+      <td>{{globalData.TotalConfirmed}}</td>
+      <td>{{globalData.TotalDeaths}}</td>
+    </tr>
+
+  </tbody>
+</table>
+
+<h4>Các nước</h4>
+<div class="form-group">
+  <label for="usr">Tìm kiếm:</label>
+  <input type="text" class="form-control" id="usr" placeholder="Nhập nội dung cần tìm.!" [(ngModel)]="search">
+</div>
+<div class="table-wrapper-scroll-y my-custom-scrollbar">
+  <table class="table table-bordered" style="margin-top: 20px;">
+    <thead>
+      <tr>
+        <th>Quốc gia <mat-icon style="cursor: pointer;" (click)="orderBy('Country','asc')">arrow_downward</mat-icon>
+          <mat-icon style="cursor: pointer;" (click)="orderBy('Country','desc')">arrow_upward</mat-icon>
+        </th>
+        <th>Mã Quốc Gia <mat-icon style="cursor: pointer;" (click)="orderBy('CountryCode','asc')">arrow_downward
+          </mat-icon>
+          <mat-icon style="cursor: pointer;" (click)="orderBy('CountryCode','desc')">arrow_upward</mat-icon>
+        </th>
+        <th>Ngày</th>
+        <th>Mới nhiễm <mat-icon style="cursor: pointer;" (click)="orderBy('NewConfirmed','asc')">arrow_downward
+          </mat-icon>
+          <mat-icon style="cursor: pointer;" (click)="orderBy('NewConfirmed','desc')">arrow_upward</mat-icon>
+        </th>
+        <th>Mới chết <mat-icon style="cursor: pointer;" (click)="orderBy('NewDeaths','asc')">arrow_downward</mat-icon>
+          <mat-icon style="cursor: pointer;" (click)="orderBy('NewDeaths','desc')">arrow_upward</mat-icon>
+        </th>
+        <th>Tổng ca nhiễm <mat-icon style="cursor: pointer;" (click)="orderBy('TotalConfirmed','asc')">arrow_downward
+          </mat-icon>
+          <mat-icon style="cursor: pointer;" (click)="orderBy('TotalConfirmed','desc')">arrow_upward</mat-icon>
+        </th>
+        <th>Tổng ca tử vong <mat-icon style="cursor: pointer;" (click)="orderBy('TotalDeaths','asc')">arrow_downward
+          </mat-icon>
+          <mat-icon style="cursor: pointer;" (click)="orderBy('TotalDeaths','desc')">arrow_upward</mat-icon>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of countriesData | filter:search">
+        <td>{{row.Country}}</td>
+        <td>{{row.CountryCode}}</td>
+        <td>{{row.Date | date: "shortDate" }}</td>
+        <td>{{row.NewConfirmed}}</td>
+        <td>{{row.NewDeaths}}</td>
+        <td>{{row.TotalConfirmed}}</td>
+        <td>{{row.TotalDeaths}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<footer class="py-5 bg-light">
+  <div class="container">
+    <p class="m-0 text-center text-black">Copyright &copy; Covid19Note</p>
+    <p class="m-0 text-center text-black">Email liên hệ: letranghoanghuy@gmail.com</p>
+    <p class="m-0 text-center text-black">This is a student topic-Đây là một đề tài sinh viên</p>
+  </div>
+</footer>

@@ -1,0 +1,29 @@
+<app-nav-admin></app-nav-admin>
+<button type="button" class="btn btn-primary" style="margin: 20px;" [routerLink]="['/adminPost-form']">
+  <mat-icon>add</mat-icon>Add Post
+</button>
+<div class="list row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Type to search" [(ngModel)]="data">
+    </div>
+    <h4>Posts List</h4>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let post of posts?.reverse() | filter:data | paginate: { itemsPerPage: 8, currentPage: page, totalItems: totalLength } ;
+    let i = index" [class.active]="i == currentIndex" (click)="setActivePost(post, i)">
+        {{ post.title }}
+      </li>
+    </ul>
+    <pagination-controls (pageChange)="page = $event" ></pagination-controls>
+  </div>
+  <div class="col-md-6">
+    <div *ngIf="currentPost">
+      <app-post-detail (refreshList)="refreshList()" [post]="currentPost"></app-post-detail>
+    </div>
+
+    <div *ngIf="!currentPost">
+      <br />
+      <p>Please click on a Post...</p>
+    </div>
+  </div>
+</div>

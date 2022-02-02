@@ -1,0 +1,51 @@
+<app-nav-client></app-nav-client>
+<h3 style="text-align:center;">Cung cấp thông tin</h3>
+
+<div class="submit-form" style="margin-top: 20px;">
+  <div *ngIf="!submitted">
+    <div class="form-group">
+      <label for="title">Tiêu đề</label>
+      <textarea type="text" class="form-control" id="title" required [(ngModel)]="information.title"
+        name="title"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="province">Tỉnh/Thành phố</label>
+      <input class="form-control" id="province" required [(ngModel)]="information.province" name="province" />
+    </div>
+
+    <div class="form-group">
+      <label for="district">Quận/Huyện</label>
+      <input class="form-control" id="district" required [(ngModel)]="information.district" name="district" />
+    </div>
+
+    <div class="form-group">
+      <label for="ward">Xã/Phường</label>
+      <input class="form-control" id="ward" required [(ngModel)]="information.ward" name="ward" />
+    </div>
+
+    <div class="form-group">
+      <label for="content">Nội dung</label>
+      <ckeditor #editor [(ngModel)]="information.content" id="content" name="content"
+        [config]=" {extraPlugins: ' divarea ',height:500 } ">
+      </ckeditor>
+    </div>
+
+    <button (click)="saveInformation()" class="btn btn-success"
+      [disabled]="!information.title || !information.province || !information.district || !information.content || !information.ward">
+      Gửi</button>
+  </div>
+
+  <div *ngIf="submitted">
+    <h4>Gửi thành công!</h4>
+    <button class="btn btn-success" (click)="newInformation()">Thêm</button>
+  </div>
+</div>
+
+<footer class="py-5 bg-light">
+  <div class="container">
+    <p class="m-0 text-center text-black">Copyright &copy; Covid19Note</p>
+    <p class="m-0 text-center text-black">Email liên hệ: letranghoanghuy@gmail.com</p>
+    <p class="m-0 text-center text-black">This is a student topic-Đây là một đề tài sinh viên</p>
+  </div>
+</footer>

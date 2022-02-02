@@ -1,0 +1,34 @@
+<app-nav-admin></app-nav-admin>
+<div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+        <label for="name">Category Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          required
+          [(ngModel)]="category.name"
+          name="name"
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="tag">Category Tag</label>
+        <input
+          class="form-control"
+          id="tag"
+          required
+          [(ngModel)]="category.tag"
+          name="tag"
+        />
+      </div>
+  
+      <button (click)="saveCategory()" class="btn btn-success" [disabled]="!category.name || !category.tag">Submit</button>
+    </div>
+  
+    <div *ngIf="submitted">
+      <h4>You submitted successfully!</h4>
+      <button class="btn btn-success" (click)="newCategory()">Add</button>
+    </div>
+  </div>

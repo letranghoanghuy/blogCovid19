@@ -1,0 +1,86 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light mat-app-background" >
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <mat-icon>home</mat-icon><span>Trang chủ</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <div class="oval" [ngClass]="{ovalSelected:theme == 'bootstrap'}" (click)="toggleTheme()">
+            <div class="button" [ngClass]="{buttonSelected:theme == 'bootstrap'}"></div><mat-icon>bedtime</mat-icon>
+          </div>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/video-list">
+            <mat-icon>video_library</mat-icon><span>Videos</span>
+          </a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/status">
+            <mat-icon>developer_board</mat-icon><span>Tình hình Covid</span>
+          </a>
+        </li>
+        <li class="nav-item dropdown active" *ngIf="(afAuth.user | async)">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <mat-icon>account_circle</mat-icon>{{ (user | async)?.displayName }}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal">
+              <mat-icon>info</mat-icon>Thông tin tài khoản
+            </a>
+            <a class="dropdown-item" routerLink="/information-form">
+              <mat-icon>add_circle</mat-icon>Cung cấp thông tin
+            </a>
+            <a class="dropdown-item" (click)="logout()">
+              <mat-icon>logout</mat-icon>
+              <span>Đăng xuất</span>
+            </a>
+          </div>
+        </li>
+        <li class="nav-item active" *ngIf="!(afAuth.user | async)">
+          <a class="nav-link" routerLink="/login">
+            <mat-icon>login</mat-icon>
+            <span>Đăng nhập</span>
+          </a>
+        </li>
+        <li class="nav-item active" *ngIf="!(afAuth.user | async)">
+          <a class="nav-link" routerLink="/signup">
+            <mat-icon>person_add</mat-icon>
+            <span>Đăng ký</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thông tin tài khoản</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <mat-list *ngIf="(user | async)">
+          <mat-list-item>Loại tài khoản: {{ (user | async)?.accountType }}</mat-list-item>
+          <mat-list-item>Tên người dùng: {{ (user | async)?.displayName }}</mat-list-item>
+          <mat-list-item>Email: {{ (user | async)?.email }}</mat-list-item>
+          <mat-list-item>Trạng thái xác minh email: {{ (afAuth.user | async)?.emailVerified }}</mat-list-item>
+        </mat-list>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>

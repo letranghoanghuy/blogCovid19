@@ -1,0 +1,49 @@
+<app-nav-admin></app-nav-admin>
+<div class="submit-form">
+  <div *ngIf="!submitted">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <textarea type="text" class="form-control" id="title" required [(ngModel)]="post.title" name="title"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="date">Date</label>
+      <input class="form-control" id="date" required [(ngModel)]="post.date" name="date" type="date" />
+    </div>
+
+    <div class="form-group">
+      <label for="category">Category</label>
+      <input class="form-control" id="category" required [(ngModel)]="post.category" name="category" />
+    </div>
+
+    <div class="form-group">
+      <label for="categoryTag">Category Tag</label>
+      <input class="form-control" id="categoryTag" required [(ngModel)]="post.categoryTag" name="categoryTag" />
+    </div>
+
+    <div class="form-group">
+      <label for="content">Content</label>
+      <ckeditor #editor [(ngModel)]="post.content" id="content" name="content"
+        [config]=" {extraPlugins: ' divarea ',height:500 } ">
+      </ckeditor>
+    </div>
+    <div class="form-group">
+      <label for="views">Views</label>
+      <input class="form-control" id="views" required [(ngModel)]="post.views" name="image2" [disabled]="true" />
+    </div>
+    <img src="{{post.image}}" class="img-thumbnail">
+    <div class="form-group">
+      <label for="image">Image </label>
+      <input class="form-control" id="image" required [(ngModel)]="post.image" name="image" />
+    </div>
+
+    <button (click)="savePost()" class="btn btn-success"
+      [disabled]="!post.title || !post.category || !post.categoryTag || !post.content || !post.image">
+      Submit</button>
+  </div>
+
+  <div *ngIf="submitted">
+    <h4>You submitted successfully!</h4>
+    <button class="btn btn-success" (click)="newPost()">Add</button>
+  </div>
+</div>

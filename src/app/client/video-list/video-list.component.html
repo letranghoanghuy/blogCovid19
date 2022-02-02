@@ -1,0 +1,47 @@
+<app-nav-client></app-nav-client>
+
+<div class="card mb-4" style="margin-top: 20px;">
+    <div class="card-header">Tìm kiếm</div>
+    <div class="card-body">
+        <div class="input-group">
+            <input class="form-control" type="text" placeholder="Nhập nội dung cần tìm..."
+                aria-label="Enter search term..." aria-describedby="button-search" [(ngModel)]="data" />
+            <button class="btn btn-primary" id="button-search" type="button" (click)="search()">Tìm!</button>
+        </div>
+    </div>
+</div>
+
+<h3 style="text-align:center">Videos</h3>
+<div class="row container">
+    <div class="col-sm-6"
+        *ngFor="let video of videos | paginate: { itemsPerPage: 8, currentPage: page, totalItems: totalLength };let i = index">
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row no-gutters">
+                <div class="col-md-6">
+                    <a (click)="setActiveVideo(video, i)"><img src="{{video.image}}" class="card-img img-thumbnail"
+                            alt="..."></a>
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <a (click)="setActiveVideo(video, i)">
+                            <h6 class="card-title">{{video.title}}</h6>
+                        </a>
+                        <p class="card-text"><small class="text-muted">
+                                <mat-icon>date_range</mat-icon>{{video.date}}
+                            </small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<pagination-controls (pageChange)="page = $event"></pagination-controls>
+
+<footer class="py-5 bg-light">
+    <div class="container">
+        <p class="m-0 text-center text-black">Copyright &copy; Covid19Note</p>
+        <p class="m-0 text-center text-black">Email liên hệ: letranghoanghuy@gmail.com</p>
+        <p class="m-0 text-center text-black">This is a student topic-Đây là một đề tài sinh viên</p>
+    </div>
+</footer>

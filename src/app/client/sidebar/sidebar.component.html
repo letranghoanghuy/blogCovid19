@@ -1,0 +1,74 @@
+<div class="card mb-4">
+    <div class="card-header">Tìm kiếm</div>
+    <div class="card-body">
+        <div class="input-group">
+            <input class="form-control" type="text" placeholder="Nhập nội dung cần tìm..."
+                aria-label="Enter search term..." aria-describedby="button-search" [(ngModel)]="data" />
+            <button class="btn btn-primary" id="button-search" type="button" (click)="search()">Tìm!</button>
+        </div>
+    </div>
+</div>
+<div id="accordion">
+    <div class="card">
+        <div class="card-header">
+            <a class="card-link" data-toggle="collapse" href="#collapseOne" (click)="changes1()">
+                Thể loại 
+                <span *ngIf="icon1" onclick='return false;'>
+                    <mat-icon>keyboard_arrow_down</mat-icon>
+                </span>
+                <span *ngIf="!icon1" onclick='return false;'>
+                    <mat-icon>keyboard_arrow_up</mat-icon>
+                </span>
+            </a>
+        </div>
+        <div id="collapseOne" class="collapse show" data-parent="#accordion">
+            <div class="card-body">
+                <!-- <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let category of categories |async" (click)="myselect(category.name)">{{category.name}}</li>
+                </ul> -->
+                <a class="list-group-item" *ngFor="let category of categories |async" (click)="myselect(category.name)">{{category.name}}</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="accordion1" style="margin-top:20px;">
+    <div class="card">
+        <div class="card-header">
+            <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo" (click)="changes()">
+                Phổ biến
+                <span *ngIf="!icon" onclick='return false;'>
+                    <mat-icon>keyboard_arrow_down</mat-icon>
+                </span>
+                <span *ngIf="icon" onclick='return false;'>
+                    <mat-icon>keyboard_arrow_up</mat-icon>
+                </span>
+            </a>
+        </div>
+        <div id="collapseTwo" class="collapse" data-parent="#accordion1">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12" *ngFor="let post of newArr | slice:0:4;let i = index">
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-6">
+                                <a (click)="setActivePost(post, i)"><img src="{{post.image}}" class="card-img img-thumbnail"
+                                        alt="..."></a>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card-body">
+                                    <a (click)="setActivePost(post, i)">
+                                        <h6 class="card-title">{{post.title}}</h6>
+                                    </a>
+                                    <!-- <div class="small text-muted" style="font-size: 9px;"><mat-icon>style</mat-icon>{{post.category}}</div> -->
+                                    <!-- <a class="btn btn-primary" style="font-size: 9px;">Đọc →</a> -->
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

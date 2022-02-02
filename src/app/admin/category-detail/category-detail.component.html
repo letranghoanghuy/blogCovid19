@@ -1,0 +1,28 @@
+<div *ngIf="currentCategory" class="edit-form">
+    <h4>Category Details</h4>
+    <form>
+        <div class="form-group">
+            <label for="name">Category Name</label>
+            <input type="text" class="form-control" id="name" [(ngModel)]="currentCategory.name" name="name" />
+        </div>
+        <div class="form-group">
+            <label for="tag">Category Tag</label>
+            <input type="text" class="form-control" id="tag" [(ngModel)]="currentCategory.tag" name="tag" />
+        </div>
+    </form>
+
+    <button class="badge badge-danger mr-2" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+        [popoverMessage]="popoverMessage" placement="left" (confirm)="deleteCategory()" (cancel)="cancelClicked = true">
+        Delete
+    </button>
+
+    <button type="submit" class="badge badge-success" (click)="updateCategory()">
+        Update
+    </button>
+    <p>{{ message }}</p>
+</div>
+
+<div *ngIf="!currentCategory">
+    <br />
+    <p>Cannot access this Category...</p>
+</div>

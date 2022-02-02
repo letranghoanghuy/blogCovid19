@@ -1,0 +1,52 @@
+<div class="login-form-container">
+    <div class="login-form">
+        <h1>Đăng ký</h1>
+
+        <mat-card class="form-card">
+            <form [formGroup]="signupForm" (ngSubmit)="signup()">
+                <p>
+                    <mat-form-field appearance="outline" class="login-field">
+                        <mat-label>Tên</mat-label>
+                        <input autocomplete="off" formControlName="displayName" type="text" matInput
+                            placeholder="Tên">
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="outline" class="login-field">
+                        <mat-label>Email</mat-label>
+                        <input formControlName="email" type="email" matInput placeholder="Email">
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="outline" class="login-field">
+                        <mat-label>Mật khẩu</mat-label>
+                        <input autocomplete="off" formControlName="password" type="password" matInput
+                        [(ngModel)]="pass1" placeholder="Mật khẩu">
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="outline" class="login-field">
+                        <mat-label>Nhập lại mật khẩu</mat-label>
+                        <input  type="password" formControlName="repass" matInput 
+                         [(ngModel)]="pass"   placeholder="Nhập lại mật khẩu">
+                    </mat-form-field>
+                </p>
+                <div *ngIf="firebaseErrorMessage != ''" class="error-style">
+                    <span>{{ firebaseErrorMessage }}</span>
+                </div>
+                <div class="login-actions">
+                    <button mat-raised-button color="primary">Đăng ký</button>
+                </div>
+            </form>
+            <button mat-raised-button color="primary" routerLink="/verify-email">
+                <mat-icon>help_outline</mat-icon>
+                <span>Gửi lại email xác minh</span>
+            </button>
+        </mat-card>
+
+        <div class="progressIndicator" [style.display]="isProgressVisible ? 'inline' : 'none' ">
+            <mat-progress-spinner class=" example-margin" color="primary" mode="indeterminate"></mat-progress-spinner>
+        </div>
+
+    </div>
+</div>
